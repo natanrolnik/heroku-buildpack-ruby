@@ -1,13 +1,20 @@
-#   ruby_version = LanguagePack::RubyVersion.new("ruby-2.2.5")
-#   outdated = LanguagePack::Helpers::DownloadPresence.new(
-#     path: ruby_version,
-#     stacks: ["cedar-14", "heroku-16", "heroku-18"]
-#     fetcher: LanguagePack::Fetcher.new(LanguagePack::Base::VENDOR_URL, "heroku-16")
-#   )
+# This class is used to check whether a binary exists on one or more stacks.
+# The main motivation for adding this logic is to help people who are upgrading
+# to a new stack if it does not have a given Ruby version. For example if someone
+# is using Ruby 1.9.3 on the cedar-14 stack then they should be informed that it
+# does not exist if they try to use it on the Heroku-18 stack.
 #
-#   outdated.call
-#   puts outdated.suggested_ruby_minor_version
-#   #=> "ruby-2.2.10"
+# Example
+#
+#    download = LanguagePack::Helpers::DownloadPresence.new(
+#      'ruby-1.9.3.tgz',
+#      stacks: ['cedar-14', 'heroku-16', 'heroku-18']
+#    )
+#
+#    download.call
+#
+#    puts download.exists? #=> true
+#    puts download.exists_on_stacks #=> ['cedar-14']
 class LanguagePack::Helpers::DownloadPresence
   STACKS = ['cedar-14', 'heroku-16', 'heroku-18']
 
