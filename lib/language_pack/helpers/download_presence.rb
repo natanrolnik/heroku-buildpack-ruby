@@ -21,7 +21,7 @@ class LanguagePack::Helpers::DownloadPresence
     end
   end
 
-  def on_stack_list
+  def exists_on_stacks
     raise "not invoked yet, use the `call` method first" if @threads.empty?
 
     @threads.map.with_index do |thread, i|
@@ -31,7 +31,6 @@ class LanguagePack::Helpers::DownloadPresence
 
   def exists?
     raise "not invoked yet, use the `call` method first" if @threads.empty?
-    join
 
     @threads.any? {|t| t.value }
   end
