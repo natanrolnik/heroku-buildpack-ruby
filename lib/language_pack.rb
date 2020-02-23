@@ -10,6 +10,7 @@ module LanguagePack
   # @param [Array] first argument is a String of the build directory
   # @return [LanguagePack] the {LanguagePack} detected
   def self.detect(*args)
+    ENV["STACK"] = "heroku-16"
     Instrument.instrument 'detect' do
       Dir.chdir(args.first)
 
